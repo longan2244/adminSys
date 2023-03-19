@@ -1,22 +1,34 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-
+import { LocalStorage } from '@/util/index.js'
+const storage = new LocalStorage('admin-')
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: '',
+    redirect: '/login'
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/login.vue')
+  }, {
+    path: '/home',
+    name: 'home-layout',
+    component: () => import('@/views/layout/layout.vue'),
+    children: [
+      {
+        path: '',
+        name: 'home',
+        component: () => import('@/views/layout/home/index.vue'),
+      }
+    ]
+  }, {
+    path: '*',
+    name: '404',
+    component: () => import('@/views/404.vue')
   }
 ]
 
@@ -24,6 +36,20 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+
+router.beforeEach((to, from, next) => {
+  if (to.path === '/login') {
+    next()
+  }
+  if (to.path.indexOf('/home') !== -1) {
+    if (storage.get('token')) {
+      next()
+    } else {
+      return next('/login')
+    }
+  }
 })
 
 export default router
