@@ -1,10 +1,10 @@
 <template>
-  <div class="home-container">home-测试文本</div>
+  <div class="roles-container">roles-测试文本</div>
 </template>
 <script>
 export default {
   components: {},
-  name: "home",
+  name: "roles",
   props: [],
   data() {
     return {};

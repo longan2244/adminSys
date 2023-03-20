@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import { LocalStorage } from '@/util/index.js'
-const storage = new LocalStorage('admin-')
+import { storage } from '@/util/index.js'
 Vue.use(VueRouter)
 
 const routes = [
@@ -17,12 +16,17 @@ const routes = [
   }, {
     path: '/home',
     name: 'home-layout',
+    redirect: '/home/users',
     component: () => import('@/views/layout/layout.vue'),
     children: [
       {
-        path: '',
-        name: 'home',
-        component: () => import('@/views/layout/home/index.vue'),
+        path: 'users',
+        name: 'users',
+        component: () => import('@/views/layout/users/index.vue'),
+      }, {
+        path: 'roles',
+        name: 'roles',
+        component: () => import('@/views/layout/roles/index.vue'),
       }
     ]
   }, {

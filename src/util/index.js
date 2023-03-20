@@ -1,3 +1,5 @@
+
+
 /**
  * 封装LocalStorage操作类
  */
@@ -51,7 +53,7 @@ class LocalStorage {
     localStorage.clear();
   }
 }
-
-export { 
-  LocalStorage
+const storage = new LocalStorage('admin-')
+export {
+  storage,
 }

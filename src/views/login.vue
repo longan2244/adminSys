@@ -11,8 +11,7 @@
               <el-input v-model="logininfo.username"></el-input>
             </el-form-item>
             <el-form-item label="密码" prop="password">
-              <el-input v-m
-              odel="logininfo.password"></el-input>
+              <el-input v-model="logininfo.password"></el-input>
             </el-form-item>
             <el-from-item>
               <el-button type="primary" @click="uigomain">登录</el-button>
@@ -25,7 +24,7 @@
   </div>
 </template>
 <script>
-import { login } from '@/api/index.js'
+import { loginAPI } from '@/api/index.js'
 export default {
   components: {},
   name: "login",
@@ -63,7 +62,7 @@ export default {
             resolve(e)
           })
         })
-        let data = await login(this.logininfo)
+        let data = await loginAPI(this.logininfo)
         this.$storage.set('token', data.token)
         this.$router.push('/home')
       } catch (error) {
