@@ -38,8 +38,7 @@
   </div>
 </template>
 <script>
-import { getMenusAPI } from "@/api/index.js"
-import router from "@/router";
+import { getMenusAPI } from "@/api/user.js"
 
 export default {
   components: {},

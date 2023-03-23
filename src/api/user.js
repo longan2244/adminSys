@@ -66,6 +66,17 @@ function deleteuser_row_API(id) {
   })
 }
 
+
+function assignRolesAPI(id, rid) {
+  return ajax({
+    method: 'PUT',
+    url: `users/${id}/role`,
+    data: {
+      rid
+    }
+  })
+}
+
 export {
   loginAPI,
   getMenusAPI,
@@ -74,5 +85,6 @@ export {
   adduserAPI,
   getuserinfo_rowAPI,
   edituserinfo_row_API,
-  deleteuser_row_API
+  deleteuser_row_API,
+  assignRolesAPI
 }

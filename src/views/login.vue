@@ -24,7 +24,7 @@
   </div>
 </template>
 <script>
-import { loginAPI } from '@/api/index.js'
+import { loginAPI } from '@/api/user.js'
 export default {
   components: {},
   name: "login",

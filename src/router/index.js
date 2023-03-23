@@ -2,7 +2,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import { storage } from '@/util/index.js'
 Vue.use(VueRouter)
-
 const routes = [
   {
     path: '/',
@@ -24,10 +23,16 @@ const routes = [
         name: 'users',
         component: () => import('@/views/layout/users/index.vue'),
       }, {
+        path: 'rights',
+        name: 'rights',
+        component: () => import('@/views/layout/power/rights.vue'),
+      },
+      {
         path: 'roles',
         name: 'roles',
-        component: () => import('@/views/layout/roles/index.vue'),
+        component: () => import('@/views/layout/power/roles.vue'),
       }
+
     ]
   }, {
     path: '*',

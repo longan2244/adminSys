@@ -34,7 +34,7 @@
             <el-button type="danger" @click="deluser_row(row)" icon="el-icon-delete"></el-button>
 
             <el-tooltip class="item" effect="dark" content="分配角色" placement="right-start">
-              <el-button type="success" icon="el-icon-set-up"></el-button>
+              <el-button type="success" @click="assignmentrole(row)" icon="el-icon-set-up"></el-button>
             </el-tooltip>
           </template>
         </el-table-column>
@@ -86,12 +86,28 @@
         <el-button type="primary" @click="edituser_row">确 定</el-button>
       </div>
     </el-dialog>
-    <!-- 对话框结束 -->
+    <!-- 编辑用户j'y'h对话框结束 -->
+    <!-- 分配角色 对话框-->
+    <el-dialog title="提示" :visible.sync="roleVisible">
+      用户当前ID: {{ roleinfo.id }}<br />
+      用户当前角色: {{ roleinfo.role_name }}<br />
+      <br>
+      <el-select v-model="value" placeholder="请选择">
+        <el-option v-for="item in roleList" :key="item.id" :label="item.roleName" :value="item.id">
+        </el-option>
+      </el-select>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="roleVisible = false">取 消</el-button>
+        <el-button type="primary" @click="addrole">确 定</el-button>
+      </span>
+    </el-dialog>
+    <!-- 分配角色 对话框结束-->
   </div>
 </template>
 <script>
 import Zztools from 'zhao-tools'
-import { deleteuser_row_API, edituserinfo_row_API, getuserinfo_rowAPI, getusersListAPI, updata_mg_stateAPI, adduserAPI } from '@/api/index.js'
+import { assignRolesAPI, deleteuser_row_API, edituserinfo_row_API, getuserinfo_rowAPI, getusersListAPI, updata_mg_stateAPI, adduserAPI } from '@/api/user.js'
+import { getRolesListAPI } from '@/api/power.js'
 
 export default {
   components: {},
@@ -137,6 +153,7 @@ export default {
 
     }
     return {
+      roleVisible: false, //分配角色
       adduserform: {
       },
       adduserrules: {
@@ -159,11 +176,37 @@ export default {
         email: '',
         mobile: '',
         username: ''
-      }
-
+      },
+      roleList: [],
+      roleinfo: {},
+      value: ''
     };
   },
   methods: {
+    //点击分配角色对话框
+    async assignmentrole(row) {
+      try {
+        this.roleList = await getRolesListAPI()
+        this.roleinfo = row
+        this.roleVisible = !this.roleVisible
+        this.value = ""
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    //点击保存角色
+    async addrole() {
+      try {
+        if (!this.value) {
+          return this.$message('请选择用户角色')
+        }
+        let data = await assignRolesAPI(this.roleinfo.id, this.value)
+        this.getusersList()
+        this.roleVisible = !this.roleVisible
+      } catch (error) {
+
+      }
+    },
     // 删除单条用户信息
     async deluser_row(row) {
       try {
