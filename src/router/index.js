@@ -31,6 +31,11 @@ const routes = [
         path: 'roles',
         name: 'roles',
         component: () => import('@/views/layout/power/roles.vue'),
+      },
+      {
+        path: 'categories',
+        name: 'categories',
+        component: () => import('@/views/layout/goods/cate.vue'),
       }
 
     ]
@@ -48,17 +53,17 @@ const router = new VueRouter({
 })
 
 
-router.beforeEach((to, from, next) => {
-  if (to.path === '/login') {
-    next()
-  }
-  if (to.path.indexOf('/home') !== -1) {
-    if (storage.get('token')) {
-      next()
-    } else {
-      return next('/login')
-    }
-  }
-})
+// router.beforeEach((to, from, next) => {
+//   if (to.path === '/login') {
+//     next()
+//   }
+//   if (to.path.indexOf('/home') !== -1) {
+//     if (storage.get('token')) {
+//       next()
+//     } else {
+//       return next('/login')
+//     }
+//   }
+// })
 
 export default router
