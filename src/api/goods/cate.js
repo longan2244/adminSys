@@ -1,6 +1,6 @@
 import ajax from '@/config/apiServe.js'
 //获取分类 1 - 2 - 3级列表
-function getcateListAPI(params) {
+function getcateListAPI(params = {}) {
   return ajax({
     method: 'GET',
     url: '/categories',

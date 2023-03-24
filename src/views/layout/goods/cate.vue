@@ -41,7 +41,7 @@ export default {
   components: {
     Addcate
   },
-  name: "cate",
+  name: "goods_cate",
   props: [],
   data() {
     return {
