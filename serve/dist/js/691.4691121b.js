@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkadminsys"]=self["webpackChunkadminsys"]||[]).push([[691],{9691:function(n,s,t){t.r(s),t.d(s,{default:function(){return d}});var e=function(){var n=this,s=n._self._c;return s("div",{staticClass:"goods-container"},[n._v("goods-测试文本")])},o=[],u={components:{},name:"goods",props:[],data(){return{}},methods:{},computed:{},watch:{},created(){},mounted(){}},a=u,r=t(1001),c=(0,r.Z)(a,e,o,!1,null,null,null),d=c.exports}}]);
+//# sourceMappingURL=691.4691121b.js.map
